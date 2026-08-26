@@ -13,7 +13,7 @@ The manuscript examines how tropical cyclone (TC) weakening depends on the inter
 - `.gitignore`: excludes large WRF output and temporary files.
 - `LICENSE`: MIT license.
 
-The uploaded scripts were copied from the working analysis workflow and are being organized for reproducibility.
+The uploaded scripts were copied from the working analysis workflow.
 
 ## External data sources
 
@@ -35,13 +35,6 @@ https://github.com/wrf-model/WRF/releases
 
 The observational scripts are used to process IBTrACS and SHIPS data, identify the last lifetime maximum intensity (LMI), calculate 24 h decay coefficients and e-folding lifetimes, and analyze the relationship between cyclone lifetime, wind shear, intensity, and their interaction.
 
-For a 24 h interval, the decay coefficient is calculated as
-
-\[
-k = \frac{\ln(V_0/V_{24})}{24},
-\]
-
-where \(V_0\) and \(V_{24}\) are the maximum wind speeds at the beginning and end of the interval. The e-folding lifetime is \(1/k\).
 
 ## WRF simulation analysis
 
@@ -49,15 +42,6 @@ The WRF scripts are used to analyze idealized simulations in which environmental
 
 Full raw WRF output is not included because of file size.
 
-## Planned processed data
-
-Reduced processed data used to reproduce the manuscript figures will be added in a later update. These may include:
-
-- observational regression tables derived from IBTrACS and SHIPS;
-- model e-folding-time grids;
-- precipitation and diabatic-heating ratio time series;
-- reduced radial-flow snapshots;
-- reduced radial–height diabatic-heating diagnostics.
 
 ## Software environment
 
