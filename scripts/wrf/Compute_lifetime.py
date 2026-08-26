@@ -772,3 +772,384 @@ def azimuthal_mean_rmw10_at_frame(
 
     return rmw_grid, max_azim_mean_wind, radius_grid, wind_azim_mean
 
+
+shear = 2
+
+ds1 = Dataset("wrf_0mshear_28sst_minsetup_largeTC_d2.nc")
+ds2 = Dataset(f"wrf_ideal_{shear}mshear_restart_at_54h_28sst_minsetup_largeTC_d2.nc")
+ds3 = Dataset(f"wrf_ideal_{shear}mshear_restart_at_60h_28sst_minsetup_largeTC_d2.nc")
+ds4 = Dataset(f"wrf_ideal_{shear}mshear_restart_at_72h_28sst_minsetup_largeTC_d2.nc")
+ds5 = Dataset(f"wrf_ideal_{shear}mshear_restart_at_78h_28sst_minsetup_largeTC_d2.nc")
+ds6 = Dataset(f"wrf_ideal_{shear}mshear_restart_at_84h_28sst_minsetup_largeTC_d2.nc")
+ds7 = Dataset(f"wrf_ideal_{shear}mshear_restart_at_96h_28sst_minsetup_largeTC_d2.nc")
+
+
+
+max_10mwind1 = []
+max_10mwind2 = []
+max_10mwind3 = []
+max_10mwind4 = []
+max_10mwind5 = []
+max_10mwind6 = []
+max_10mwind7 = []
+
+
+max_10mwind1 = get_10m_max_wind(ds1,max_10mwind1)
+max_10mwind2 = get_10m_max_wind(ds2,max_10mwind2)
+max_10mwind3 = get_10m_max_wind(ds3,max_10mwind3)
+max_10mwind4 = get_10m_max_wind(ds4,max_10mwind4)
+max_10mwind5 = get_10m_max_wind(ds5,max_10mwind5)
+max_10mwind6 = get_10m_max_wind(ds6,max_10mwind6)
+max_10mwind7 = get_10m_max_wind(ds7,max_10mwind7)
+
+
+
+psfc1 = wrf.getvar(ds1, "PSFC", timeidx=wrf.ALL_TIMES, meta=False)
+print(1)
+psfc2 = wrf.getvar(ds2, "PSFC", timeidx=wrf.ALL_TIMES, meta=False)
+print(2)
+psfc3 = wrf.getvar(ds3, "PSFC", timeidx=wrf.ALL_TIMES, meta=False)
+print(3)
+psfc4 = wrf.getvar(ds4, "PSFC", timeidx=wrf.ALL_TIMES, meta=False)
+print(4)
+psfc5 = wrf.getvar(ds5, "PSFC", timeidx=wrf.ALL_TIMES, meta=False)
+print(4)
+psfc6 = wrf.getvar(ds6, "PSFC", timeidx=wrf.ALL_TIMES, meta=False)
+print(4)
+psfc7 = wrf.getvar(ds7, "PSFC", timeidx=wrf.ALL_TIMES, meta=False)
+print(4)
+
+
+
+# ===== 第一张图：最大10m风速 =====
+plt.figure()
+plt.plot(np.arange(2, 132), max_10mwind1[2:132], label='0m')
+'''
+plt.plot(np.arange(0, 48) + 54, max_10mwind2[0:48], label=f'{shear}m 54h restart')
+plt.plot(np.arange(0, 48) + 60, max_10mwind3[0:48], label=f'{shear}m 60h restart')
+plt.plot(np.arange(0, 48) + 72, max_10mwind4[0:48], label=f'{shear}m 72h restart')
+plt.plot(np.arange(0, 48) + 78, max_10mwind5[0:48], label=f'{shear}m 78h restart')
+plt.plot(np.arange(0, 48) + 84, max_10mwind6[0:48], label=f'{shear}m 84h restart')
+plt.plot(np.arange(0, 48) + 96, max_10mwind7[0:48], label=f'{shear}m 96h restart')
+'''
+
+plt.legend()
+plt.xlabel('Hours from start')
+plt.ylabel('Max wind (m/s)')
+plt.title(f'Max 10m wind (not azimuthal) for {shear}m/s shear larger TC different restarts')
+
+# ===== 第二张图：最低地面气压 =====
+plt.figure()
+plt.plot(np.arange(2, 132), np.min(psfc1, axis=(1,2))[2:132], label='0m')
+'''
+plt.plot(np.arange(0, 48) + 54, np.min(psfc2, axis=(1,2))[0:48], label=f'{shear}m 54h restart')
+plt.plot(np.arange(0, 48) + 60, np.min(psfc3, axis=(1,2))[0:48], label=f'{shear}m 60h restart')
+plt.plot(np.arange(0, 48) + 72, np.min(psfc4, axis=(1,2))[0:48], label=f'{shear}m 72h restart')
+plt.plot(np.arange(0, 48) + 78, np.min(psfc5, axis=(1,2))[0:48], label=f'{shear}m 78h restart')
+plt.plot(np.arange(0, 48) + 84, np.min(psfc6, axis=(1,2))[0:48], label=f'{shear}m 84h restart')
+plt.plot(np.arange(0, 48) + 96, np.min(psfc7, axis=(1,2))[0:48], label=f'{shear}m 96h restart')
+'''
+
+plt.legend()
+plt.xlabel('Hours from start')
+plt.ylabel('Minimum Pressure (Pa)')
+plt.title(f'Minimum pressure for {shear}m/s shear larger TC different restarts')
+
+plt.show()
+
+
+def sliding_avg_diff(arr1, arr2, window=6):
+    """
+    arr1: wind1 数组（长度 42）
+    arr2: wind2 数组（长度 42）
+    window: 滑动窗口大小（默认 6 小时）
+    返回：每 6 小时平均差的序列
+    """
+
+    n = len(arr1)
+    diffs = []
+
+    for i in range(n - window + 1):
+        mean1 = np.mean(arr1[i:i + window])
+        mean2 = np.mean(arr2[i:i + window])
+        diffs.append(mean1 - mean2)
+
+    return np.array(diffs)
+
+arr1 = np.min(psfc1, axis=(1,2))[36:78]/100
+arr2 = np.min(psfc5, axis=(1,2))[:42]/100
+diff_series = sliding_avg_diff(arr1, arr2, window=6)
+print(diff_series)
+print("输出长度 =", len(diff_series))
+
+
+restart_time = 96
+
+
+sheared_wind = max_10mwind9
+sheared_pressure = psfc9
+control_pressure = psfc1
+
+sheared_pressure_anomaly = []
+control_pressure_anomaly = []
+
+
+base_pressure = np.mean(sheared_pressure[0,:5, :])-np.min(sheared_pressure, axis=(1,2))[0]
+print(base_pressure)
+
+consider_hour_interval = 48
+window_size = 24
+sum_percentage_difference = 0
+wind_speed_difference = []
+pressure_difference = []
+
+sheared_percentage_difference = []
+
+for frame in range(restart_time,restart_time+consider_hour_interval):
+    difference_from_control = (sheared_wind[frame-restart_time]-max_10mwind1[frame])
+    sheared_pressure_anomaly_this_frame = np.mean(sheared_pressure[frame-restart_time,:5, :])-np.min(sheared_pressure, axis=(1,2))[frame-restart_time]
+    control_pressure_anomaly_this_frame = np.mean(control_pressure[frame,:5, :])-np.min(control_pressure, axis=(1,2))[frame]
+    wind_speed_difference.append(difference_from_control)
+    
+    
+    pressure_difference.append(sheared_pressure_anomaly_this_frame-control_pressure_anomaly_this_frame)
+    sheared_pressure_anomaly.append(sheared_pressure_anomaly_this_frame)
+    control_pressure_anomaly.append(control_pressure_anomaly_this_frame)
+
+    
+percentage_shear_evolution = sheared_wind/np.mean(sheared_wind[0:72])
+
+
+#print('Average wind speed difference percentage between shear and control (0m) is: ',percentage_difference_average*100,'% of control wind speed')
+
+
+
+linear_weaken_factor = 0
+
+
+
+time = np.arange(0, consider_hour_interval)
+
+#consider_value = percentage_shear_evolution
+consider_value = wind_speed_difference
+
+slopes = []
+slopes_percentage = []
+r2s = []
+centers = []  # 每个回归段的中心时间（用于作图）
+
+for i in range(0,consider_hour_interval - window_size + 1):
+    x_window = time[i:i + window_size].reshape(-1, 1)
+    y_window = consider_value[i:i + window_size]
+
+    model = LinearRegression().fit(x_window, y_window)
+    y_pred = model.predict(x_window)
+
+    slope = model.coef_[0]
+    r2 = r2_score(y_window, y_pred)
+
+    slopes.append(slope)
+    slopes_percentage.append(slope/np.mean(sheared_wind[i:i+window_size]))
+    r2s.append(r2)
+    centers.append(time[i + window_size // 2])  # 用中点代表这个窗口
+
+slopes = np.array(slopes)
+slopes_percentage = np.array(slopes_percentage)
+r2s = np.array(r2s)
+centers = np.array(centers)
+
+# 输出结果
+#for t, s, r in zip(centers, slopes, r2s):
+    #print(f"Center hour={t:2d}, slope={s:.3f}, R²={r:.3f}")
+
+
+mask = r2s > 0.6
+indices = centers[mask]
+print(slopes[mask])
+print(indices)
+
+max_slope = np.max(slopes[mask])
+min_slope = np.min(slopes[mask])
+print(max_slope,'      max slope start time',np.where(mask)[0][np.argmax(slopes[mask])])
+print(min_slope,'   ***target***   min slope start time',np.where(mask)[0][np.argmin(slopes[mask])])
+
+max_slope_percentage = np.max(slopes_percentage[mask])
+min_slope_percentage = np.min(slopes_percentage[mask])
+print(max_slope_percentage*100,'%','      max slope_percentage start time',np.where(mask)[0][np.argmax(slopes_percentage[mask])])
+print(min_slope_percentage*100,'%','  ***target***    min slope_percentage start time',np.where(mask)[0][np.argmin(slopes_percentage[mask])])
+
+
+fig, ax1 = plt.subplots()
+
+ax1.plot(centers, slopes, '-o', color='tab:blue', label='Slope')
+ax1.set_xlabel(f'Center of {window_size}h window (hour)')
+ax1.set_ylabel('Slope', color='tab:blue')
+ax1.tick_params(axis='y', labelcolor='tab:blue')
+
+ax2 = ax1.twinx()
+ax2.plot(centers, r2s, '-s', color='tab:red', label='R²')
+ax2.set_ylabel('R²', color='tab:red')
+ax2.tick_params(axis='y', labelcolor='tab:red')
+
+plt.title(f'Sliding {window_size}h linear regression: slope and R²')
+plt.show()
+
+
+
+linear_weaken_factor = 0
+
+
+
+time = np.arange(0, consider_hour_interval)
+
+consider_value = sheared_wind
+
+
+k = []
+hours = []
+
+
+for i in range(0,consider_hour_interval - window_size + 1):
+    k.append(np.log(consider_value[i]/consider_value[i+window_size])/window_size)
+    hours.append(i)
+
+
+k = np.array(k)
+
+
+
+max_k = np.max(k)
+min_k = np.min(k)
+print(max_k,'   ***target***   max k start time',np.argmax(k))
+print(min_k,'      min k start time',np.argmin(k))
+
+
+fig, ax1 = plt.subplots()
+
+ax1.plot(hours, k, '-o', color='tab:blue', label='Slope')
+ax1.set_xlabel(f'Start of {window_size}h window (hour)')
+ax1.set_ylabel('k', color='tab:blue')
+ax1.tick_params(axis='y', labelcolor='tab:blue')
+
+
+plt.title(f'Sliding v_wind {window_size}h k')
+plt.show()
+
+
+
+linear_weaken_factor = 0
+
+
+
+time = np.arange(0, consider_hour_interval)
+
+consider_value = sheared_pressure_anomaly
+
+
+k = []
+hours = []
+
+
+for i in range(0,consider_hour_interval - window_size):
+    k.append(np.log(consider_value[i]/consider_value[i+window_size])/window_size)
+    hours.append(i)
+
+
+k = np.array(k)
+
+
+
+max_k = np.max(k)
+min_k = np.min(k)
+print(max_k,'  ***target***    max k start time',np.argmax(k))
+print(min_k,'      min k start time',np.argmin(k))
+
+
+fig, ax1 = plt.subplots()
+
+ax1.plot(hours, k, '-o', color='tab:blue', label='Slope')
+ax1.set_xlabel(f'Start of {window_size}h window (hour)')
+ax1.set_ylabel('k', color='tab:blue')
+ax1.tick_params(axis='y', labelcolor='tab:blue')
+
+
+plt.title(f'Sliding pressure_deficit {window_size}h k')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
