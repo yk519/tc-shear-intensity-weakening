@@ -16,7 +16,7 @@ Analysis scripts and reduced processed diagnostics for the manuscript:
 
 - `data_processed/`
 
-  Reduced processed diagnostics used to support and reproduce the manuscript and Supporting Information figures. These include the model lifetime table, radial-flow diagnostics, precipitation and diabatic-heating ratio diagnostics, and radial-height diabatic-heating diagnostics.
+  Processed diagnostics used to support and reproduce the manuscript and Supporting Information figures. These include the model lifetime table, radial-flow diagnostics, precipitation and diabatic-heating ratio diagnostics, and radial-height diabatic-heating diagnostics.
 
 ## Data sources
 
