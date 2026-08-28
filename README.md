@@ -1,56 +1,29 @@
-# TC shear–intensity weakening analysis
+# tc-shear-intensity-weakening
 
-This repository contains analysis scripts for the manuscript:
+Analysis scripts and reduced processed diagnostics for the manuscript:
 
 **Joint Dependence of Tropical Cyclone Weakening on Vertical Wind Shear and Intensity**
 
-The manuscript examines how tropical cyclone (TC) weakening depends on the interaction between pre-weakening intensity and environmental vertical wind shear (VWS). The analysis combines best-track observations with idealized WRF simulations.
-
 ## Repository contents
 
-- `scripts/`: analysis scripts used for the observational analysis and WRF diagnostics.
-- `config/`: WRF configuration files and imposed shear profile information.
-- `.gitignore`: excludes large WRF output and temporary files.
-- `LICENSE`: MIT license.
+- `scripts/`
 
-The uploaded scripts were copied from the working analysis workflow.
+  Analysis scripts used for the IBTrACS--SHIPS observational analysis and WRF post-processing diagnostics.
 
-## External data sources
+- `config/`
 
-The raw observational datasets are publicly available and are not redistributed in this repository.
+  Configuration files and simulation setup information, where available.
 
-IBTrACS v04r01 data are available from NOAA/NCEI:
+- `data_processed/`
 
-https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r01/access/netcdf/
+  Reduced processed diagnostics used to support and reproduce the manuscript and Supporting Information figures. These include the model lifetime table, radial-flow diagnostics, precipitation and diabatic-heating ratio diagnostics, and radial-height diabatic-heating diagnostics.
 
-SHIPS developmental data are available from:
+## Data sources
 
-https://rammb2.cira.colostate.edu/research/tropical-cyclones/ships/development_data/
+The observational data used in the manuscript are publicly available from IBTrACS and SHIPS. The WRF model is publicly available from the WRF model repository.
 
-The WRF model is available from:
-
-https://github.com/wrf-model/WRF/releases
-
-## Observational analysis
-
-The observational scripts are used to process IBTrACS and SHIPS data, identify the last lifetime maximum intensity (LMI), calculate 24 h decay coefficients and e-folding lifetimes, and analyze the relationship between cyclone lifetime, wind shear, intensity, and their interaction.
-
-
-## WRF simulation analysis
-
-The WRF scripts are used to analyze idealized simulations in which environmental vertical wind shear is imposed on developed TC vortices. Diagnostics include model e-folding lifetime, upper-level radial flow, precipitation ratios, diabatic-heating ratios, and radial–height diabatic-heating structure.
-
-Full raw WRF output is not included because of file size.
-
-
-## Software environment
-
-The scripts use standard scientific Python packages, including `numpy`, `pandas`, `xarray`, `netCDF4`, `matplotlib`, and `scipy`. Additional packages may be required depending on the local WRF and NetCDF workflow.
-
-## Citation
-
-A citable archived version of this repository will be created before publication, for example through Zenodo. The DOI will be added here once available.
+This repository does not contain the full raw WRF output files because of their large size. Reduced processed WRF diagnostics are provided in `data_processed/`. Access to the full raw WRF output can be requested from the corresponding author and shared through institutional file transfer or another suitable data-transfer method.
 
 ## License
 
-This repository is released under the MIT License.
+Code in this repository is provided under the MIT License.
