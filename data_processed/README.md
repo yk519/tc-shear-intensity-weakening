@@ -1,6 +1,6 @@
-# Reduced processed diagnostics
+# Processed diagnostics
 
-This directory contains reduced processed diagnostics used to support the quantitative figures in the manuscript and Supporting Information.
+This directory contains processed diagnostics used to support the quantitative figures in the manuscript and Supporting Information.
 
 These files are derived from the WRF simulations and are intended to provide the figure-level and diagnostic-level data needed to evaluate and reproduce the reported model results. They are not full raw WRF output files.
 
@@ -20,11 +20,11 @@ These files are derived from the WRF simulations and are intended to provide the
 
 - `fig3_radial_flow_weak_0_20h.zip`
 
-  ZIP archive containing reduced radial-flow diagnostics for the weak-cyclone example from 0 to 20 h.
+  ZIP archive containing radial-flow diagnostics for the weak-cyclone example from 0 to 20 h.
 
 - `fig3_radial_flow_strong_0_20h.zip`
 
-  ZIP archive containing reduced radial-flow diagnostics for the strong-cyclone example from 0 to 20 h.
+  ZIP archive containing radial-flow diagnostics for the strong-cyclone example from 0 to 20 h.
 
 The source simulation and source frame are recorded in the columns `source_type`, `source_path`, and `source_frame_index`.
 
@@ -49,6 +49,6 @@ The source simulation and source frame are recorded in the columns `source_type`
 
 ## Notes on raw WRF output
 
-The full raw WRF output files are not archived in this repository because they are substantially larger than the reduced diagnostics provided here. The files in this directory contain reduced processed WRF diagnostics used to evaluate and reproduce the reported manuscript and Supporting Information figures, including the model lifetime table, cropped radial-flow fields, precipitation and diabatic-heating box diagnostics, and radial-height diabatic-heating diagnostics.
+The full raw WRF output files are not archived in this repository because they are substantially larger than the diagnostics provided here. The files in this directory contain processed WRF diagnostics used to evaluate and reproduce the reported manuscript and Supporting Information figures, including the model lifetime table, cropped radial-flow fields, precipitation and diabatic-heating box diagnostics, and radial-height diabatic-heating diagnostics.
 
 If access to the complete raw WRF output is needed beyond the archived reduced diagnostics, it can be requested from the corresponding author. The files can be shared through institutional file transfer or another suitable data-transfer method where feasible.
