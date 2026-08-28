@@ -10,7 +10,7 @@ These files are derived from the WRF simulations and are intended to provide the
 
 - `fig2_model_lifetime_table.csv`
 
-  Model e-folding lifetime as a function of shear-onset maximum wind speed and imposed vertical wind shear. Rows correspond to imposed vertical wind shear, columns correspond to shear-onset intensity, and values are e-folding lifetime in hours. Non-decaying or strengthening cases are assigned a lifetime of 1000 h, as described in the manuscript.
+  Rows correspond to imposed vertical wind shear, columns correspond to shear-onset intensity, and values are e-folding lifetime in hours. Non-decaying or strengthening cases are assigned a lifetime of 1000 h, as described in the manuscript.
 
 ### Figure 3
 
@@ -26,7 +26,7 @@ These files are derived from the WRF simulations and are intended to provide the
 
   ZIP archive containing reduced radial-flow diagnostics for the strong-cyclone example from 0 to 20 h.
 
-For Figure 3, the 0 h panels are taken from the corresponding no-shear simulation at the restart time and represent the pre-shear initial vortex. Later times are taken from the sheared simulations and indicate hours after shear onset. The source simulation and source frame are recorded in the columns `source_type`, `source_path`, and `source_frame_index`.
+The source simulation and source frame are recorded in the columns `source_type`, `source_path`, and `source_frame_index`.
 
 ### Figure 4 and Supporting Figure S2
 
@@ -49,4 +49,6 @@ For Figure 3, the 0 h panels are taken from the corresponding no-shear simulatio
 
 ## Notes on raw WRF output
 
-The full raw WRF output files are not archived in this repository because of their large size. The files in this directory provide reduced processed diagnostics used to reproduce the reported manuscript and Supporting Information figures. Access to the full raw WRF output can be requested from the corresponding author and shared through institutional file transfer or another suitable data-transfer method.
+The full raw WRF output files are not archived in this repository because they are substantially larger than the reduced diagnostics provided here. The files in this directory contain reduced processed WRF diagnostics used to evaluate and reproduce the reported manuscript and Supporting Information figures, including the model lifetime table, cropped radial-flow fields, precipitation and diabatic-heating box diagnostics, and radial-height diabatic-heating diagnostics.
+
+If access to the complete raw WRF output is needed beyond the archived reduced diagnostics, it can be requested from the corresponding author. The files can be shared through institutional file transfer or another suitable data-transfer method where feasible.
