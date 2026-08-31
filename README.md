@@ -22,8 +22,6 @@ Analysis scripts and reduced processed diagnostics for the manuscript:
 
 The observational data used in the manuscript are publicly available from IBTrACS and SHIPS. The WRF model is publicly available from the WRF model repository.
 
-This repository does not contain the full raw WRF output files because of their large size. Processed WRF diagnostics are provided in `data_processed/`. Access to the full raw WRF output can be requested from the corresponding author and shared through institutional file transfer or another suitable data-transfer method.
-
 ## License
 
 Code in this repository is provided under the MIT License.
