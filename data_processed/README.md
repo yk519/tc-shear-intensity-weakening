@@ -46,9 +46,3 @@ The source simulation and source frame are recorded in the columns `source_type`
 - `figS3_radial_height_heating_strong_0_20h.csv`
 
   Radial-height azimuthal-mean diabatic-heating diagnostics for the weak and strong cyclone examples from 0 to 20 h. The files include radius, height, diabatic heating, RMW, and three-times-RMW at each analysis time.
-
-## Notes on raw WRF output
-
-The full raw WRF output files are not archived in this repository because they are substantially larger than the diagnostics provided here. The files in this directory contain processed WRF diagnostics used to evaluate and reproduce the reported manuscript and Supporting Information figures, including the model lifetime table, cropped radial-flow fields, precipitation and diabatic-heating box diagnostics, and radial-height diabatic-heating diagnostics.
-
-If access to the complete raw WRF output is needed beyond the archived reduced diagnostics, it can be requested from the corresponding author. The files can be shared through institutional file transfer or another suitable data-transfer method where feasible.
